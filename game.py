@@ -73,6 +73,7 @@ class Flappy_Bird_Game:
                 closest_pipe = pipe
         if closest_pipe is None:
             return self.bird_rect.y, self.y_vel, 0, 0, 0
+        
         return self.y_vel, x_dist, self.bird_rect.y+self.bird_rect.h, closest_pipe.y, closest_pipe.y + closest_pipe.h
 
     def get_reward(self, action, prev_y, new_y):

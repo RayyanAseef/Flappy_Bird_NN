@@ -91,7 +91,6 @@ class Agent:
         self.model.train()
         print(f"Model loaded from {model_path}")
 
-# Model Class remains the same as before
 class Model(nn.Module):
     def __init__(self, n_input, n_hidden, n_output):
         super().__init__()

@@ -7,13 +7,13 @@ pygame.init()
 screen_width, screen_height = 1200, 600
 
 screen = pygame.display.set_mode((screen_width, screen_height)) 
-game = Flappy_Bird_Game(screen_width, screen_height, True)
+game = Flappy_Bird_Game(screen_width, screen_height, False)
 
 running = True
 dead = False
 
 # Specify the path where you want to save the model
-model_path = "flappy_bird_model2.pth"
+model_path = "flappy_bird_model2_v3.pth"
 agent = Agent(model_path=model_path)
 
 record = 0

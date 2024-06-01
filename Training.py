@@ -3,12 +3,12 @@ import random
 from collections import deque
 from game import Flappy_Bird_Game
 from NN import Agent
+import torch.optim as optim
 
 def train_flappy_bird(num_episodes, model_path=None):
     game = Flappy_Bird_Game(1200, 600, False)
     agent = Agent(model_path=model_path)
 
-    agent.n_games = 0
     record = 0
 
     for episode in range(num_episodes):
@@ -22,12 +22,15 @@ def train_flappy_bird(num_episodes, model_path=None):
             action = agent.get_action(state)
             if action[1] == 1: wait = 0
             reward = game.input(action)
+
+            next_state_dead = False
             while True:
-                if wait > 10:
+                if wait > 10 or next_state_dead:
                     next_state = game.get_state()
                     break
                 else:
                     game.input([1, 0])
+                    next_state_dead = game.isDead()
                     wait+=1
             
             dead = game.isDead()
@@ -49,5 +52,5 @@ def train_flappy_bird(num_episodes, model_path=None):
 # Example usage
 if __name__ == "__main__":
     model_path = "flappy_bird_model2_v2.pth"
-    num_episodes = 10000  # Set the number of episodes for training
+    num_episodes = 100000  # Set the number of episodes for training
     train_flappy_bird(num_episodes, model_path)
